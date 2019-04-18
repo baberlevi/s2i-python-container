@@ -41,7 +41,7 @@ RUN INSTALL_PKGS="libjpeg-turbo libjpeg-turbo-devel python27 python27-python-dev
     yum install -y centos-release-scl epel-release && \
     yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
-    yum -y install gdal gdal-devel && \
+    yum -y install gdal gdal-devel gdal-python && \
     # Remove centos-logos (httpd dependency) to keep image size smaller.
     rpm -e --nodeps centos-logos && \
     yum -y clean all --enablerepo='*'
@@ -59,7 +59,6 @@ COPY ./root/ /
 #   writable as OpenShift default security model is to run the container
 #   under random UID.
 RUN source scl_source enable python27 && \
-    virtualenv ${APP_ROOT} && \
     chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P && \
     rpm-file-permissions
