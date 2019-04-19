@@ -34,11 +34,11 @@ LABEL summary="$SUMMARY" \
       usage="s2i build https://github.com/sclorg/s2i-python-container.git --context-dir=2.7/test/setup-test-app/ centos/python-27-centos7 python-sample-app" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
 
-RUN INSTALL_PKGS="libjpeg-turbo libjpeg-turbo-devel python27 python27-python-devel python27-python-setuptools \
-        python27-python-pip nss_wrapper httpd24 httpd24-httpd-devel httpd24-mod_ssl \
+RUN INSTALL_PKGS="libjpeg-turbo libjpeg-turbo-devel python-devel python-setuptools \
+        python-pip nss_wrapper httpd24 httpd24-httpd-devel httpd24-mod_ssl \
         httpd24-mod_auth_kerb httpd24-mod_ldap httpd24-mod_session atlas-devel gcc-gfortran \
-        libffi-devel libtool-ltdl enchant pyOpenSSL python2-crypto" && \
-    yum install -y centos-release-scl epel-release && \
+        libffi-devel libtool-ltdl enchant pyOpenSSL python-crypto" && \
+    yum install -y epel-release && \
     yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum -y install gdal gdal-devel gdal-python && \
@@ -58,8 +58,7 @@ COPY ./root/ /
 # - In order to drop the root user, we have to make some directories world
 #   writable as OpenShift default security model is to run the container
 #   under random UID.
-RUN source scl_source enable python27 && \
-    chown -R 1001:0 ${APP_ROOT} && \
+RUN chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P && \
     rpm-file-permissions
 
