@@ -39,7 +39,7 @@ RUN INSTALL_PKGS="libjpeg-turbo libjpeg-turbo-devel python-devel python-setuptoo
         httpd24-mod_auth_kerb httpd24-mod_ldap httpd24-mod_session atlas-devel gcc-gfortran \
         libffi-devel libtool-ltdl enchant pyOpenSSL python-crypto" && \
     yum install -y epel-release && \
-    yum -y --setopt=tsflags=nodocs install --enablerepo=centosplus $INSTALL_PKGS && \
+    yum -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum -y install gdal gdal-devel gdal-python && \
     # Remove centos-logos (httpd dependency) to keep image size smaller.
