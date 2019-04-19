@@ -39,7 +39,7 @@ LABEL summary="$SUMMARY" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>"
 
 RUN INSTALL_PKGS="python3 python3-devel python3-setuptools python3-pip python3-virtualenv \
-        nss_wrapper httpd httpd-devel atlas-devel gcc-gfortran gdal gdal-devel python3-gdal \
+        nss_wrapper httpd httpd-devel atlas-devel gcc-gfortran gdal gdal-devel python3-gdal python3-numpy \
         libffi-devel libtool-ltdl enchant" && \
     dnf -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
